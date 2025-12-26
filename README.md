@@ -34,4 +34,24 @@ This project uses SQL to analyze business data and derive actionable insights fo
 - Case statements
 - Date functions
 
+🗂️ Database Schema
+The analysis is based on the following tables:
+- customer_t – Customer demographic and payment details
+- order_t – Order, feedback, discount, revenue, and shipping data
+- product_t – Vehicle details (make, price, etc.)
+
+🗂 Dataset Description
+
+The dataset contains transactional, customer, product, and logistics information captured through the NewWheels mobile application. It includes details related to vehicle orders, customer profiles, shipping partners, pricing, discounts, and customer feedback, organized at an order level.
+
+Key entities include:
+
+- Customers (demographics, location, payment details)
+- Products (vehicle attributes and pricing)
+- Orders (order dates, quantities, discounts)
+- Shipping (shipper details, shipping mode, delivery timelines)
+- Feedback (customer experience and satisfaction)
+- Time Dimensions (quarter-wise segmentation)
+  <img width="634" height="614" alt="image" src="https://github.com/user-attachments/assets/fd8758be-e1c0-4fef-af1d-17a6b10f6b66" />
+
 
