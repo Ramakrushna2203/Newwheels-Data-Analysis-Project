@@ -27,7 +27,7 @@ This project uses SQL to analyze business data and derive actionable insights fo
 Database: MySQL
 Language: SQL
 Techniques Used:
-      -Joins
+      - Joins
       -Window functions (RANK, LAG)
       -CTEs
       -Aggregations
