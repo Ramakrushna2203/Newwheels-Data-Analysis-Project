@@ -27,11 +27,11 @@ This project uses SQL to analyze business data and derive actionable insights fo
 Database: MySQL
 Language: SQL
 Techniques Used:
-      Joins
-      Window functions (RANK, LAG)
-      CTEs
-      Aggregations
-      Case statements
-      Date functions
+      -Joins
+      -Window functions (RANK, LAG)
+      -CTEs
+      -Aggregations
+      -Case statements
+      -Date functions
 
 
