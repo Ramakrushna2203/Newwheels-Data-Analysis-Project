@@ -74,13 +74,14 @@ The dataset contains transactional, customer, product, and logistics information
 
 # Data Analysis & Findings
 
-### 1. What is the distribution of customers across states?
+###  What is the distribution of customers across states?
 
 ```SELECT COUNT(DISTINCT customer_id) AS total_customers FROM order_t;```
 
-### 2. What is the average rating in each quarter? (Very Bad is 1, Bad is 2, Okay is 3, Good is 4, Very Good is 5)
+###  What is the average rating in each quarter? (Very Bad is 1, Bad is 2, Okay is 3, Good is 4, Very Good is 5)
 
-```SELECT AVG(rating) AS overall_avg_rating FROM
+```
+SELECT AVG(rating) AS overall_avg_rating FROM
  (SELECT CASE WHEN customer_feedback = 'Very Bad' THEN 1
 WHEN customer_feedback = 'Very Bad' THEN 1
 WHEN customer_feedback = 'Bad' THEN 2
@@ -100,12 +101,13 @@ CASE
 	WHEN customer_feedback = 'Very Good' THEN 5
 END AS rating FROM order_t ) AS ratings
 GROUP BY quarter_number
-ORDER BY quarter_number;```
+ORDER BY quarter_number;
 
-
+```
 ### 3. Are customers getting more dissatisfied over time?
 
-```SELECT quarter_number,
+```
+SELECT quarter_number,
 SUM(CASE WHEN customer_feedback = 'Very Bad' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS very_bad_percentage,
 SUM(CASE WHEN customer_feedback = 'Bad' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS bad_percentage,
 SUM(CASE WHEN customer_feedback = 'Okay' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS okay_percentage,
@@ -139,5 +141,132 @@ WITH cust_feed AS
         ROUND((very_bad/total_feedback),2)AS very_bad
 	FROM cust_feed
 	GROUP BY 1
-    ORDER BY 1 ASC;```
+    ORDER BY 1 ASC; 
+```
+### 4. Which are the top 5 vehicle makers preferred by the customer.
+```
+SELECT vehicle_maker, COUNT(*) AS num_orders
+FROM order_t
+JOIN product_t ON order_t.product_id = product_t.product_id
+GROUP BY vehicle_maker
+ORDER BY num_orders DESC
+LIMIT 5;
 
+```
+### 5. What is the most preferred vehicle make in each state?
+```
+SELECT *
+FROM
+(
+	SELECT 
+		state, 
+		vehicle_maker,
+		COUNT(customer_id) AS total_customers,
+    RANK() OVER (PARTITION BY state ORDER BY COUNT(customer_id) DESC) AS ranking
+    FROM product_t 
+    JOIN order_t USING(product_id)
+    JOIN customer_t USING(customer_id)
+	GROUP BY 1, 2 
+) AS preferred_vehicle
+WHERE ranking = 1
+ORDER BY 3 DESC;
+
+```
+### 6.  What is the trend of number of orders by quarters?
+
+```
+SELECT 
+	quarter_number,
+	COUNT(order_id) AS total_orders
+FROM order_t
+GROUP BY 1
+ORDER BY 1;
+
+
+
+```
+### 7 What is the quarter over quarter % change in revenue? 
+
+```
+WITH QoQ AS 
+(
+	SELECT quarter_number, 
+        ROUND(SUM(quantity * (vehicle_price - ((discount/100)*vehicle_price))), 0) AS revenue
+	FROM order_t
+	GROUP BY quarter_number)
+SELECT quarter_number, revenue,
+ROUND(LAG(revenue) OVER(ORDER BY quarter_number), 2) AS previous_revenue,
+ROUND((revenue - LAG(revenue) OVER(ORDER BY quarter_number))/LAG(revenue) OVER(ORDER BY quarter_number), 2) AS qoq_perc_change
+FROM QoQ;
+
+
+
+
+```
+### 8.  What is the trend of number of orders by quarters?
+
+```
+SELECT 
+	quarter_number,
+	ROUND(SUM(quantity*vehicle_price), 0) AS revenue,
+    COUNT(order_id) AS total_order
+FROM order_t
+GROUP BY 1
+ORDER BY 1;
+
+
+```
+### 9.  What is the average discount offered for different types of credit cards?
+
+```
+ SELECT 
+	credit_card_type,
+	ROUND(AVG(discount), 2) AS average_discount
+FROM order_t t1
+INNER JOIN customer_t t2
+ ON t1.customer_id = t2.customer_id
+GROUP BY 1
+ORDER BY 2 DESC;
+
+```
+### 10.  What is the trend of number of orders by quarters?
+
+```
+What is the average time taken to ship the placed orders for each quarters?
+
+
+```
+ 
+
+## 🚨 Critical Insight
+
+- Shipping delays increased 3× from Q1 to Q4
+- Strong correlation with rising negative feedback
+
+- Logistics inefficiency is a major driver of dissatisfaction
+
+## 📌 Key Business Conclusions
+
+- Customer satisfaction is declining sharply
+- Orders and revenue are falling quarter-over-quarter
+- Shipping delays are a critical operational bottleneck
+- Discounts are not solving core business problems
+
+## ✅ Strategic Recommendations
+
+- Improve logistics and reduce shipping delays
+- Strengthen after-sales support
+- Focus on high-performing states and brands
+- Redesign customer retention strategy
+- Shift from discount-led growth to experience-led growth
+
+# Conclusion
+
+** This project demonstrates the effective use of SQL to analyze business data and answer key analytical questions. By examining customer behavior, sales trends, product preferences, and operational metrics, the analysis highlights how structured queries can generate actionable insights. Overall, the project showcases SQL as a powerful tool for supporting data-driven decision-making and business performance evaluation. ** 
+
+# 👤 Author
+
+### Ramakrushna Nayak
+#### Aspiring Data Analyst | SQL | Business Analytics
+
+# *** 📌 This project demonstrates strong SQL skills combined with business problem-solving and executive-level insights.***
