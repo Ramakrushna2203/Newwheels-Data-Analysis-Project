@@ -74,11 +74,11 @@ The dataset contains transactional, customer, product, and logistics information
 
 # Data Analysis & Findings
 
-###  What is the distribution of customers across states?
+### 1. What is the distribution of customers across states?
 
 ```SELECT COUNT(DISTINCT customer_id) AS total_customers FROM order_t;```
 
-###  What is the average rating in each quarter? (Very Bad is 1, Bad is 2, Okay is 3, Good is 4, Very Good is 5)
+### 2. What is the average rating in each quarter? (Very Bad is 1, Bad is 2, Okay is 3, Good is 4, Very Good is 5)
 
 ```
 SELECT AVG(rating) AS overall_avg_rating FROM
@@ -262,11 +262,11 @@ What is the average time taken to ship the placed orders for each quarters?
 
 # Conclusion
 
-** This project demonstrates the effective use of SQL to analyze business data and answer key analytical questions. By examining customer behavior, sales trends, product preferences, and operational metrics, the analysis highlights how structured queries can generate actionable insights. Overall, the project showcases SQL as a powerful tool for supporting data-driven decision-making and business performance evaluation. ** 
+  This project demonstrates the effective use of SQL to analyze business data and answer key analytical questions. By examining customer behavior, sales trends, product preferences, and operational metrics, the analysis highlights how structured queries can generate actionable insights. Overall, the project showcases SQL as a powerful tool for supporting data-driven decision-making and business performance evaluation.   
 
 # 👤 Author
 
 ### Ramakrushna Nayak
 #### Aspiring Data Analyst | SQL | Business Analytics
 
-# *** 📌 This project demonstrates strong SQL skills combined with business problem-solving and executive-level insights.***
+###    📌 This project demonstrates strong SQL skills combined with business problem-solving and executive-level insights 
