@@ -24,14 +24,14 @@ This project uses SQL to analyze business data and derive actionable insights fo
 
 🛠️ Tools & Technologies
 
-Database: MySQL
-Language: SQL
-Techniques Used:
+- Database: MySQL
+- Language: SQL
+- Techniques Used:
 - Joins
--Window functions (RANK, LAG)
--CTEs
--Aggregations
--Case statements
--Date functions
+- Window functions (RANK, LAG)
+- CTEs
+- Aggregations
+- Case statements
+- Date functions
 
 
