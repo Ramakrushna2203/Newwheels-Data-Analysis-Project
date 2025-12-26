@@ -54,4 +54,26 @@ Key entities include:
 - Time Dimensions (quarter-wise segmentation)
   <img width="634" height="614" alt="image" src="https://github.com/user-attachments/assets/fd8758be-e1c0-4fef-af1d-17a6b10f6b66" />
 
+  Key Business Questions Answered
+👥 Customer Analysis
+1. Distribution of customers across states
+2. Average customer rating by quarter
+3. Customer dissatisfaction trends over time
+4. Top 5 preferred vehicle makers
+5. Most preferred vehicle maker in each state
 
+💰 Revenue & Orders
+6 Quarterly trend of number of orders
+7. Quarter-over-quarter (QoQ) revenue growth/decline
+8. Combined trend of revenue and orders
+
+🚚 Operations & Shipping
+9. Average discount by credit card type
+10. Average shipping time per quarter
+
+
+# Data Analysis & Findings
+
+[Q1] What is the distribution of customers across states?
+
+SELECT COUNT(DISTINCT customer_id) AS total_customers FROM order_t;
