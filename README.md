@@ -63,7 +63,7 @@ The dataset contains transactional, customer, product, and logistics information
 5. Most preferred vehicle maker in each state
 
 #### 💰 Revenue & Orders
-6 Quarterly trend of number of orders
+6. Quarterly trend of number of orders
 7. Quarter-over-quarter (QoQ) revenue growth/decline
 8. Combined trend of revenue and orders
 
@@ -74,6 +74,31 @@ The dataset contains transactional, customer, product, and logistics information
 
 # Data Analysis & Findings
 
-1. What is the distribution of customers across states?
+#### 1. What is the distribution of customers across states?
 
 ```SELECT COUNT(DISTINCT customer_id) AS total_customers FROM order_t;```
+
+#### 2. What is the average rating in each quarter? [Very Bad is 1, Bad is 2, Okay is 3, Good is 4, Very Good is 5]
+
+```SELECT AVG(rating) AS overall_avg_rating FROM
+ (SELECT CASE WHEN customer_feedback = 'Very Bad' THEN 1
+WHEN customer_feedback = 'Very Bad' THEN 1
+WHEN customer_feedback = 'Bad' THEN 2
+WHEN customer_feedback = 'Okay' THEN 3
+WHEN customer_feedback = 'Good' THEN 4
+WHEN customer_feedback = 'Very Good' THEN 5
+END AS rating FROM order_t ) AS ratings;
+select distinct customer_feedback from order_t;
+
+SELECT quarter_number, AVG(rating) AS avg_rating_per_quarter FROM 
+(SELECT quarter_number,
+CASE 
+	WHEN customer_feedback = 'Very Bad' THEN 1
+	WHEN customer_feedback = 'Bad' THEN 2
+	WHEN customer_feedback = 'Okay' THEN 3
+	WHEN customer_feedback = 'Good' THEN 4
+	WHEN customer_feedback = 'Very Good' THEN 5
+END AS rating FROM order_t ) AS ratings
+GROUP BY quarter_number
+ORDER BY quarter_number;```
+
