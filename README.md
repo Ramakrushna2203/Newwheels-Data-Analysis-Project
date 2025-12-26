@@ -21,3 +21,17 @@ This project uses SQL to analyze business data and derive actionable insights fo
 - Analyze revenue and order trends quarterly
 - Assess operational efficiency, especially shipping delays
 - Provide insights to support strategic business decisions
+
+🛠️ Tools & Technologies
+
+Database: MySQL
+Language: SQL
+Techniques Used:
+      Joins
+      Window functions (RANK, LAG)
+      CTEs
+      Aggregations
+      Case statements
+      Date functions
+
+
