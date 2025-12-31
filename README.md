@@ -203,7 +203,7 @@ FROM QoQ;
 
 
 ```
-### 8.  What is the trend of number of orders by quarters?
+### 8.  What is the trend of revenue and orders by quarters?
 
 ```
 SELECT 
@@ -229,10 +229,16 @@ GROUP BY 1
 ORDER BY 2 DESC;
 
 ```
-### 10.  What is the trend of number of orders by quarters?
+### 10.  What is the average time taken to ship the placed orders for each quarters?
+
 
 ```
-What is the average time taken to ship the placed orders for each quarters?
+SELECT 
+	quarter_number,
+    ROUND(AVG(DATEDIFF(ship_date, order_date)), 0) AS average_shipping_time
+FROM order_t
+GROUP BY 1
+ORDER BY 1;
 
 
 ```
